@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Thoti Pacifique</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- FullCalendar -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    
+    <!-- Custom Dashboard CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-arrow-left me-2"></i>Back to Portfolio
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link">
+                            <i class="fas fa-sync-alt refresh-btn me-2" onclick="refreshDashboard()"></i>Refresh
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="container">
+            <!-- Dashboard Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h3">Developer Dashboard</h1>
+                <div class="btn-group">
+                    <button class="btn btn-outline-primary btn-sm" onclick="exportData()">
+                        <i class="fas fa-download me-1"></i>Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-secondary">GitHub Repos</small>
+                                    <h3 class="mb-0" id="repoCount">15</h3>
+                                </div>
+                                <div class="stats-icon bg-primary bg-opacity-10 text-primary">
+                                    <i class="fab fa-github"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-success">+3 this month</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-secondary">Commits (30d)</small>
+                                    <h3 class="mb-0" id="commitCount">247</h3>
+                                </div>
+                                <div class="stats-icon bg-success bg-opacity-10 text-success">
+                                    <i class="fas fa-code-branch"></i>
+                                </div>
+                            </div>
+                            <div class="progress mt-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-secondary">LeetCode Solved</small>
+                                    <h3 class="mb-0">89</h3>
+                                </div>
+                                <div class="stats-icon bg-warning bg-opacity-10 text-warning">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-warning">Next: 100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-secondary">Coding Streak</small>
+                                    <h3 class="mb-0">21 days</h3>
+                                </div>
+                                <div class="stats-icon bg-danger bg-opacity-10 text-danger">
+                                    <i class="fas fa-fire"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-danger">Personal Best!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Contributions Graph -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-transparent">
+                            <h5 class="mb-0">
+                                <i class="fab fa-github me-2"></i>GitHub Contributions
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="github-graph" class="github-graph">
+                                <img src="https://ghchart.rshah.org/Thotipaccy" alt="GitHub Contributions" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Content -->
+            <div class="row g-4">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+                    <!-- Skills Radar Chart -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-pie me-2"></i>Skills Proficiency
+                            </h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary active" onclick="changeChartType('radar')">Radar</button>
+                                <button class="btn btn-outline-primary" onclick="changeChartType('bar')">Bars</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="skillsChart" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Recent Projects with Progress -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-project-diagram me-2"></i>Recent Projects Progress
+                            </h5>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Project</th>
+                                            <th>Tech Stack</th>
+                                            <th>Progress</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="assets/images/projects/thumb1.jpg" class="rounded me-2" width="40" height="40" alt="">
+                                                    <div>
+                                                        <strong>E-Learning Platform</strong>
+                                                        <small class="d-block text-secondary">Updated 2 days ago</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">React</span>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">Node.js</span>
+                                            </td>
+                                            <td style="width: 200px;">
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-success" style="width: 90%"></div>
+                                                </div>
+                                                <small class="text-secondary">90%</small>
+                                            </td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="assets/images/projects/thumb2.jpg" class="rounded me-2" width="40" height="40" alt="">
+                                                    <div>
+                                                        <strong>Student Performance ML</strong>
+                                                        <small class="d-block text-secondary">Updated 5 days ago</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">Python</span>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">TensorFlow</span>
+                                            </td>
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-warning" style="width: 75%"></div>
+                                                </div>
+                                                <small class="text-secondary">75%</small>
+                                            </td>
+                                            <td><span class="badge bg-warning">In Progress</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="assets/images/projects/thumb3.jpg" class="rounded me-2" width="40" height="40" alt="">
+                                                    <div>
+                                                        <strong>Cloud Storage System</strong>
+                                                        <small class="d-block text-secondary">Updated 1 week ago</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">AWS</span>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">React</span>
+                                            </td>
+                                            <td>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-primary" style="width: 60%"></div>
+                                                </div>
+                                                <small class="text-secondary">60%</small>
+                                            </td>
+                                            <td><span class="badge bg-info">Planning</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semester Calendar -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-transparent">
+                            <h5 class="mb-0">
+                                <i class="fas fa-calendar-alt me-2"></i>Semester Calendar
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-lg-4">
+                    <!-- Quick Links -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-transparent">
+                            <h5 class="mb-0">
+                                <i class="fas fa-link me-2"></i>Quick Links
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="https://github.com/Thotipaccy" target="_blank" class="btn btn-outline-dark text-start">
+                                    <i class="fab fa-github me-2"></i>GitHub Profile
+                                </a>
+                                <a href="https://linkedin.com/in/thotipaccy" target="_blank" class="btn btn-outline-primary text-start">
+                                    <i class="fab fa-linkedin me-2"></i>LinkedIn
+                                </a>
+                                <a href="https://leetcode.com/thotipaccy" target="_blank" class="btn btn-outline-warning text-start">
+                                    <i class="fas fa-code me-2"></i>LeetCode
+                                </a>
+                                <a href="https://university.blackboard.com" target="_blank" class="btn btn-outline-secondary text-start">
+                                    <i class="fas fa-university me-2"></i>University Portal
+                                </a>
+                                <a href="mailto:thotipaccy@gmail.com" class="btn btn-outline-danger text-start">
+                                    <i class="fas fa-envelope me-2"></i>Email
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Latest Blog Posts -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-blog me-2"></i>Latest Blog Posts
+                            </h5>
+                            <a href="blog.html" class="btn btn-sm btn-link">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action px-0">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Getting Started with AWS</h6>
+                                        <small class="text-secondary">2 days ago</small>
+                                    </div>
+                                    <small class="text-secondary">Cloud computing basics for beginners</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action px-0">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">React Hooks Explained</h6>
+                                        <small class="text-secondary">1 week ago</small>
+                                    </div>
+                                    <small class="text-secondary">Understanding useState and useEffect</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action px-0">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Machine Learning Roadmap</h6>
+                                        <small class="text-secondary">2 weeks ago</small>
+                                    </div>
+                                    <small class="text-secondary">My journey into ML</small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Assignment Status -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-transparent">
+                            <h5 class="mb-0">
+                                <i class="fas fa-tasks me-2"></i>Assignment Status
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Database Design</span>
+                                    <span class="text-primary">85%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                                </div>
+                                <small class="text-secondary">Due: Mar 15, 2025</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Web Development</span>
+                                    <span class="text-primary">60%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-warning" style="width: 60%"></div>
+                                </div>
+                                <small class="text-secondary">Due: Mar 20, 2025</small>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span>Network Security</span>
+                                    <span class="text-primary">30%</span>
+                                </div>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-danger" style="width: 30%"></div>
+                                </div>
+                                <small class="text-secondary">Due: Apr 1, 2025</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificates -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-transparent">
+                            <h5 class="mb-0">
+                                <i class="fas fa-certificate me-2"></i>Recent Certificates
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="certificate-icon bg-primary bg-opacity-10 text-primary">
+                                    <i class="fab fa-aws"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">AWS Cloud Practitioner</h6>
+                                    <small class="text-secondary">Issued Feb 2025</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="certificate-icon bg-success bg-opacity-10 text-success">
+                                    <i class="fab fa-google"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Google IT Support</h6>
+                                    <small class="text-secondary">Issued Jan 2025</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="certificate-icon bg-info bg-opacity-10 text-info">
+                                    <i class="fab fa-meta"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-1">Meta Frontend Developer</h6>
+                                    <small class="text-secondary">Issued Dec 2024</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Project Modal -->
+    <div class="modal fade" id="addProjectModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProjectForm">
+                        <div class="mb-3">
+                            <label class="form-label">Project Name</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tech Stack</label>
+                            <input type="text" class="form-control" placeholder="React, Node.js, MongoDB">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Progress (%)</label>
+                            <input type="number" class="form-control" min="0" max="100">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">GitHub URL</label>
+                            <input type="url" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="addProject()">Add Project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/charts-config.js"></script>
+</body>
+</html>
