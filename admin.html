@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Admin Dashboard</title>
+    <title>Thoti Pacifique - IT Student & Developer Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio of Thoti Pacifique, IT student specializing in software development, machine learning, and cloud computing. View projects, skills, and interactive dashboard.">
+    <meta name="keywords" content="IT student, software developer, portfolio, Rwanda, Python, JavaScript, React, AWS">
+    <meta name="author" content="Thoti Pacifique">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,298 +16,241 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom Admin CSS -->
-    <link rel="stylesheet" href="css/admin.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Simple Admin Dashboard -->
-    <div class="admin-wrapper">
-        <!-- Sidebar -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h3>📋 Portfolio Admin</h3>
-                <p class="text-white-50 small">Edit your content</p>
-            </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top bg-white dark-navbar shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <span class="gradient-text">TP.dev</span>
+            </a>
             
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" data-section="profile">
-                        <i class="fas fa-user"></i> Profile
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-section="education">
-                        <i class="fas fa-graduation-cap"></i> Education
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-section="skills">
-                        <i class="fas fa-code"></i> Skills
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-section="projects">
-                        <i class="fas fa-project-diagram"></i> Projects
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-section="social">
-                        <i class="fas fa-share-alt"></i> Social Links
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-section="settings">
-                        <i class="fas fa-cog"></i> Settings
-                    </a>
-                </li>
-            </ul>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             
-            <div class="sidebar-footer">
-                <a href="index.html" target="_blank" class="btn btn-outline-light w-100 mb-2">
-                    <i class="fas fa-eye"></i> View Portfolio
-                </a>
-                <button class="btn btn-light w-100" id="resetDataBtn">
-                    <i class="fas fa-undo"></i> Reset to Default
-                </button>
-            </div>
-        </nav>
-
-        <!-- Main Content Area -->
-        <main class="admin-main">
-            <div class="container-fluid">
-                <!-- Header -->
-                <div class="admin-header">
-                    <h2 id="sectionTitle">Profile Settings</h2>
-                    <div class="header-actions">
-                        <span class="badge bg-success" id="saveStatus"></span>
-                        <button class="btn btn-primary" id="saveAllBtn">
-                            <i class="fas fa-save"></i> Save Changes
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-chart-pie me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-sm btn-outline-secondary rounded-circle" id="darkModeToggle">
+                            <i class="fas fa-moon"></i>
                         </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section min-vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-4">
+                        <i class="fas fa-code me-2"></i>IT Student & Developer
+                    </div>
+                    <h1 class="display-3 fw-bold mb-4">
+                        Hi, I'm <span class="gradient-text">Thoti Pacifique</span>
+                    </h1>
+                    <p class="lead text-secondary mb-4">
+                        Computer Science student at University of Rwanda, passionate about building innovative solutions and exploring cutting-edge technologies.
+                    </p>
+                    
+                    <!-- Quick Actions -->
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#contact" class="btn btn-primary px-4 py-2">
+                            <i class="fas fa-paper-plane me-2"></i>Hire Me
+                        </a>
+                        <a href="#projects" class="btn btn-outline-primary px-4 py-2">
+                            <i class="fas fa-code-branch me-2"></i>View Projects
+                        </a>
+                        <a href="dashboard.html" class="btn btn-outline-info px-4 py-2">
+                            <i class="fas fa-chart-pie me-2"></i>Live Dashboard
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="d-flex gap-3">
+                        <a href="https://github.com/Thotipaccy" target="_blank" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/thotipaccy" target="_blank" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://twitter.com/thotipaccy" target="_blank" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:thotipaccy@gmail.com" class="social-icon">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
-
-                <!-- Dynamic Content Forms -->
-                <div class="admin-content">
-                    <!-- Profile Section -->
-                    <div id="profile-section" class="section-form active">
-                        <form id="profileForm">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-info-circle"></i> Basic Information
-                                            </h5>
-                                            <div class="mb-3">
-                                                <label class="form-label">Full Name</label>
-                                                <input type="text" class="form-control" id="profileName" placeholder="THOTI PACIFIQUE NIBISHAKA">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Title / Tagline</label>
-                                                <input type="text" class="form-control" id="profileTitle" placeholder="Software Engineering Student | Passionate Developer">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Bio</label>
-                                                <textarea class="form-control" id="profileBio" rows="5" placeholder="Write your bio here..."></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-address-card"></i> Contact Information
-                                            </h5>
-                                            <div class="mb-3">
-                                                <label class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="profileEmail" placeholder="thotipaccy@gmail.com">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Phone</label>
-                                                <input type="text" class="form-control" id="profilePhone" placeholder="+250 786 308 963">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Location</label>
-                                                <input type="text" class="form-control" id="profileLocation" placeholder="Kigali, Rwanda">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Avatar Image</label>
-                                                <input type="text" class="form-control" id="profileAvatar" placeholder="image.png">
-                                                <small class="text-muted">Filename of your profile picture</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="card mt-3">
-                                        <div class="card-body">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-chart-simple"></i> Stats
-                                            </h5>
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <label class="form-label">Years Learning</label>
-                                                    <input type="text" class="form-control" id="statsYears" placeholder="3+">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label">Skills Mastered</label>
-                                                    <input type="text" class="form-control" id="statsSkills" placeholder="10+">
-                                                </div>
-                                                <div class="col-4">
-                                                    <label class="form-label">Dedication</label>
-                                                    <input type="text" class="form-control" id="statsDedication" placeholder="100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <!-- Profile Image -->
+                        <div class="profile-image-wrapper">
+                            <img src="assets/images/profile.jpg" alt="Thoti Pacifique" class="img-fluid rounded-4 shadow" onerror="this.src='https://via.placeholder.com/500x500?text=Profile'">
+                            
+                            <!-- Floating Tech Icons -->
+                            <div class="floating-icon python">
+                                <i class="fab fa-python"></i>
                             </div>
-                        </form>
-                    </div>
-
-                    <!-- Education Section -->
-                    <div id="education-section" class="section-form">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="card-title">
-                                        <i class="fas fa-graduation-cap"></i> Education Timeline
-                                    </h5>
-                                    <button class="btn btn-success btn-sm" id="addEducationBtn">
-                                        <i class="fas fa-plus"></i> Add Education
-                                    </button>
-                                </div>
-                                <div id="educationList"></div>
-                                <p class="text-muted small mt-2">
-                                    <i class="fas fa-info-circle"></i> Add your educational background in chronological order
-                                </p>
+                            <div class="floating-icon react">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <div class="floating-icon js">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="floating-icon aws">
+                                <i class="fab fa-aws"></i>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Skills Section -->
-                    <div id="skills-section" class="section-form">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-code"></i> Technical Skills
-                                            </h5>
-                                            <button class="btn btn-success btn-sm" id="addTechSkillBtn">
-                                                <i class="fas fa-plus"></i> Add Skill
-                                            </button>
-                                        </div>
-                                        <div id="techSkillsList"></div>
+    <!-- About Section -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold">About Me</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h3 class="h4 mb-4">
+                                <i class="fas fa-graduation-cap text-primary me-2"></i>Education Journey
+                            </h3>
+                            
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-marker bg-primary"></div>
+                                    <div class="timeline-content">
+                                        <h4 class="h5">Bachelor's in Information Technology</h4>
+                                        <p class="text-primary mb-2">University of Rwanda | 2024 - 2028</p>
+                                        <p class="text-secondary">Specializing in Software Engineering and Cloud Computing. Current GPA: 3.8/4.0</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <h5 class="card-title">
-                                                <i class="fas fa-users"></i> Soft Skills
-                                            </h5>
-                                            <button class="btn btn-success btn-sm" id="addSoftSkillBtn">
-                                                <i class="fas fa-plus"></i> Add Skill
-                                            </button>
-                                        </div>
-                                        <div id="softSkillsList"></div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-marker bg-success"></div>
+                                    <div class="timeline-content">
+                                        <h4 class="h5">Certifications</h4>
+                                        <ul class="list-unstyled">
+                                            <li class="mb-2">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                AWS Certified Cloud Practitioner (In Progress)
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                Google IT Support Professional Certificate
+                                            </li>
+                                            <li class="mb-2">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                Meta Frontend Developer Specialization
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Projects Section -->
-                    <div id="projects-section" class="section-form">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="card-title">
-                                        <i class="fas fa-project-diagram"></i> Projects
-                                    </h5>
-                                    <button class="btn btn-success btn-sm" id="addProjectBtn">
-                                        <i class="fas fa-plus"></i> Add Project
-                                    </button>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h3 class="h4 mb-4">
+                                <i class="fas fa-chart-line text-primary me-2"></i>Skills Proficiency
+                            </h3>
+                            
+                            <div class="skills-container">
+                                <!-- Python -->
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-semibold">Python</span>
+                                        <span class="text-primary">85%</span>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" style="width: 85%"></div>
+                                    </div>
                                 </div>
-                                <div id="projectsList"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Social Links Section -->
-                    <div id="social-section" class="section-form">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-share-alt"></i> Social Media Links
-                                </h5>
-                                <form id="socialForm">
-                                    <div class="mb-3">
-                                        <label class="form-label">GitHub URL</label>
-                                        <input type="url" class="form-control" id="socialGithub" placeholder="https://github.com/Thotipaccy">
+                                
+                                <!-- JavaScript/React -->
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-semibold">JavaScript/React</span>
+                                        <span class="text-primary">75%</span>
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="socialEmail" placeholder="thotipaccy@gmail.com">
-                                        <small class="text-muted">This will be used for the contact button</small>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" style="width: 75%"></div>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Settings Section -->
-                    <div id="settings-section" class="section-form">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-eye"></i> Section Visibility
-                                </h5>
-                                <p class="text-muted small">Toggle which sections appear on your portfolio</p>
-                                <form id="settingsForm">
-                                    <div class="form-check form-switch mb-3">
-                                        <input class="form-check-input" type="checkbox" id="showAbout" checked>
-                                        <label class="form-check-label">Show About Section</label>
+                                </div>
+                                
+                                <!-- SQL -->
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-semibold">SQL & Databases</span>
+                                        <span class="text-primary">70%</span>
                                     </div>
-                                    <div class="form-check form-switch mb-3">
-                                        <input class="form-check-input" type="checkbox" id="showEducation" checked>
-                                        <label class="form-check-label">Show Education Section</label>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" style="width: 70%"></div>
                                     </div>
-                                    <div class="form-check form-switch mb-3">
-                                        <input class="form-check-input" type="checkbox" id="showSkills" checked>
-                                        <label class="form-check-label">Show Skills Section</label>
+                                </div>
+                                
+                                <!-- AWS -->
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-semibold">AWS Cloud</span>
+                                        <span class="text-primary">60%</span>
                                     </div>
-                                    <div class="form-check form-switch mb-3">
-                                        <input class="form-check-input" type="checkbox" id="showProjects" checked>
-                                        <label class="form-check-label">Show Projects Section</label>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" style="width: 60%"></div>
                                     </div>
-                                    <div class="form-check form-switch mb-3">
-                                        <input class="form-check-input" type="checkbox" id="showContact" checked>
-                                        <label class="form-check-label">Show Contact Section</label>
+                                </div>
+                                
+                                <!-- React Native -->
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-semibold">React Native</span>
+                                        <span class="text-primary">65%</span>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                        
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <i class="fas fa-database"></i> Data Management
-                                </h5>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <button class="btn btn-outline-danger w-100" id="resetDataBtn2">
-                                            <i class="fas fa-undo"></i> Reset to Default
-                                        </button>
-                                    </div>
-                                    <div class="col-6">
-                                        <button class="btn btn-outline-info w-100" id="exportDataBtn">
-                                            <i class="fas fa-download"></i> Export Data
-                                        </button>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" style="width: 65%"></div>
                                     </div>
                                 </div>
                             </div>
@@ -310,17 +258,351 @@
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+            
+            <!-- Stats Row -->
+            <div class="row g-4 mt-4" data-aos="fade-up">
+                <div class="col-md-3 col-6">
+                    <div class="card border-0 shadow-sm text-center p-4">
+                        <h3 class="display-5 fw-bold text-primary">15+</h3>
+                        <p class="text-secondary mb-0">Projects Completed</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card border-0 shadow-sm text-center p-4">
+                        <h3 class="display-5 fw-bold text-primary">8</h3>
+                        <p class="text-secondary mb-0">Certifications</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card border-0 shadow-sm text-center p-4">
+                        <h3 class="display-5 fw-bold text-primary">2+</h3>
+                        <p class="text-secondary mb-0">Years Coding</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="card border-0 shadow-sm text-center p-4">
+                        <h3 class="display-5 fw-bold text-primary">10+</h3>
+                        <p class="text-secondary mb-0">Technologies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Simple Floating Action Button to return to portfolio -->
-    <a href="index.html" class="float-btn">
-        <i class="fas fa-arrow-left"></i> Back to Portfolio
-    </a>
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold">Featured Projects</h2>
+                <div class="section-divider"></div>
+                <p class="lead text-secondary">A showcase of my technical skills and creativity</p>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="d-flex flex-wrap justify-content-center gap-2 mb-5" data-aos="fade-up">
+                <button class="btn btn-outline-primary active filter-btn" data-filter="all">All</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="web">Web Apps</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="ml">ML/AI</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="database">Database</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="cloud">Cloud</button>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="row g-4" id="projectsGrid">
+                <!-- Project 1: E-Learning Platform -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="web">
+                    <div class="card project-card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <img src="assets/images/projects/elearning.jpg" class="card-img-top" alt="E-Learning Platform" onerror="this.src='https://via.placeholder.com/400x250?text=E-Learning'">
+                            <div class="project-overlay">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">E-Learning Platform</h5>
+                            <p class="card-text text-secondary small">A full-stack learning management system with video streaming, quizzes, and progress tracking.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">React</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">Node.js</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">MongoDB</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 90%"></div>
+                            </div>
+                            <small class="text-secondary">Completion: 90%</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2: Student Performance Predictor -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="ml">
+                    <div class="card project-card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <img src="assets/images/projects/ml.jpg" class="card-img-top" alt="Student Performance Predictor" onerror="this.src='https://via.placeholder.com/400x250?text=ML+Project'">
+                            <div class="project-overlay">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Student Performance Predictor</h5>
+                            <p class="card-text text-secondary small">ML model that predicts student performance based on study habits and past grades.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">Python</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">Scikit-learn</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Flask</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-warning" style="width: 75%"></div>
+                            </div>
+                            <small class="text-secondary">Completion: 75%</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3: Library Management System -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="database">
+                    <div class="card project-card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <img src="assets/images/projects/library.jpg" class="card-img-top" alt="Library Management System" onerror="this.src='https://via.placeholder.com/400x250?text=Library+System'">
+                            <div class="project-overlay">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Library Management System</h5>
+                            <p class="card-text text-secondary small">Database-driven system for managing books, patrons, and loans with advanced queries.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">MySQL</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">PHP</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Bootstrap</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 100%"></div>
+                            </div>
+                            <small class="text-secondary">Completed</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4: Cloud File Storage -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="cloud">
+                    <div class="card project-card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <img src="assets/images/projects/cloud.jpg" class="card-img-top" alt="Cloud File Storage" onerror="this.src='https://via.placeholder.com/400x250?text=Cloud+Storage'">
+                            <div class="project-overlay">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cloud File Storage</h5>
+                            <p class="card-text text-secondary small">Secure file storage solution using AWS S3 with user authentication and sharing.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">AWS</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">React</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Node.js</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-warning" style="width: 60%"></div>
+                            </div>
+                            <small class="text-secondary">In Progress: 60%</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5: Mobile Chat App -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="web">
+                    <div class="card project-card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <img src="assets/images/projects/chat.jpg" class="card-img-top" alt="Mobile Chat App" onerror="this.src='https://via.placeholder.com/400x250?text=Chat+App'">
+                            <div class="project-overlay">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mobile Chat App</h5>
+                            <p class="card-text text-secondary small">Real-time chat application with Firebase, push notifications, and image sharing.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">React Native</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">Firebase</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">Socket.io</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                            </div>
+                            <small class="text-secondary">Completion: 85%</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6: IoT Dashboard -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="ml">
+                    <div class="card project-card h-100 border-0 shadow-sm">
+                        <div class="position-relative overflow-hidden">
+                            <img src="assets/images/projects/iot.jpg" class="card-img-top" alt="IoT Dashboard" onerror="this.src='https://via.placeholder.com/400x250?text=IoT+Dashboard'">
+                            <div class="project-overlay">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a href="#" class="btn btn-sm btn-light" target="_blank"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">IoT Sensor Dashboard</h5>
+                            <p class="card-text text-secondary small">Real-time visualization of IoT sensor data with predictive analytics.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">Python</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary me-1">TensorFlow</span>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">D3.js</span>
+                            </div>
+                            <div class="progress mb-2" style="height: 5px;">
+                                <div class="progress-bar bg-primary" style="width: 70%"></div>
+                            </div>
+                            <small class="text-secondary">Completion: 70%</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Projects Button -->
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="dashboard.html" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-chart-pie me-2"></i>View Full Dashboard
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 fw-bold">Get In Touch</h2>
+                <div class="section-divider"></div>
+                <p class="lead text-secondary">Let's collaborate on your next project</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-right">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h3 class="h4 mb-4">Contact Information</h3>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="contact-icon bg-primary bg-opacity-10 text-primary">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <small class="text-secondary">Email</small>
+                                    <p class="mb-0 fw-semibold">thotipaccy@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="contact-icon bg-primary bg-opacity-10 text-primary">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <small class="text-secondary">Phone</small>
+                                    <p class="mb-0 fw-semibold">+250 786 308 963</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="contact-icon bg-primary bg-opacity-10 text-primary">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <small class="text-secondary">Location</small>
+                                    <p class="mb-0 fw-semibold">Kigali, Rwanda</p>
+                                </div>
+                            </div>
+                            
+                            <hr class="my-4">
+                            
+                            <h4 class="h5 mb-3">Follow Me</h4>
+                            <div class="d-flex gap-2">
+                                <a href="https://github.com/Thotipaccy" target="_blank" class="btn btn-outline-secondary">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/thotipaccy" target="_blank" class="btn btn-outline-secondary">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://twitter.com/thotipaccy" target="_blank" class="btn btn-outline-secondary">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8" data-aos="fade-left">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="h4 mb-4">Send Me a Message</h3>
+                            
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" placeholder="Your Name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control" placeholder="Your Email" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Subject">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary px-4">
+                                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Thoti Pacifique. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white-50 text-decoration-none me-3">Privacy</a>
+                    <a href="#" class="text-white-50 text-decoration-none me-3">Terms</a>
+                    <a href="#" class="text-white-50 text-decoration-none">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/data.js"></script>
-    <script src="js/admin-simple.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
